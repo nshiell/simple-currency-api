@@ -27,6 +27,10 @@ $router->get('/api/exchange/info', function () {
 $router->get('/api/exchange/{value}/{from}/{to}', function ($from, $to, $value) {
     try {
         $rate = app(\App\Factories\RateFactory::class)->createRate($from, $to);
+
+        if (!is_numeric($value) || (float) $value <= 0) {
+            throw new UnexpectedValueException('Invalid value');
+        }
     } catch (\UnexpectedValueException $e) {
         return response()->json([
             'error' => 1,
