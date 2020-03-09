@@ -42,7 +42,7 @@ For Bonus points:
 <html>
 <head>
 	<script>
-		var api_url = 'http://localhost:3000';	// <---- modify this to point to your code
+		var api_url = '<?php echo env('APP_URL') ?>';	// <---- modify this to point to your code
 	</script>
 
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -137,11 +137,13 @@ function calc()
 	    url: url,
 	    success: function (response) {
 	    	console.log('RECV:',response);
-	    	resp = JSON.parse(response);
-	    	if (resp.error == 1) {
-	             alert('ERROR: ' +resp.msg);
+            //resp = JSON.parse(response); <-- removed
+            // NShiell change - the date is JSON,
+            // so don't try and JSON encode it
+	    	if (response.error == 1) {
+	             alert('ERROR: ' +response.msg);
 	        } else {
-	            $("#result").html(resp.amount);
+	            $("#result").html(response.amount);
 	        }
 	    }
 	});
@@ -156,11 +158,11 @@ function about()
 	    url: url,
 	    success: function (response) {
 	    	console.log('RECV:',response);
-	    	resp = JSON.parse(response);
-	        if (resp.error == 1) {
-	             alert('ERROR: ' +resp.msg);
+	    	//resp = JSON.parse(response);
+	        if (response.error == 1) {
+	             alert('ERROR: ' +response.msg);
 	        } else {
-	        	alert(resp.msg);
+	        	alert(response.msg);
 	        }
 	    }
 	});
@@ -176,11 +178,11 @@ function clear()
 	    url: url,
 	    success: function (response) {
 	    	console.log('RECV:',response);
-	    	resp = JSON.parse(response);
-	        if (resp.error == 1) {
-	             alert('ERROR: ' +resp.msg);
+	    	//resp = JSON.parse(response);
+	        if (response.error == 1) {
+	             alert('ERROR: ' +response.msg);
 	        } else {
-	        	alert(resp.msg);
+	        	alert(response.msg);
 	        }
 	    }
 	});
