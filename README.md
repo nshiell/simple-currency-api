@@ -1,6 +1,7 @@
 # Simple API Test - by Nicholas Shiell
 
 ## To install
+* composer install
 * execute ```create-database.sql``` in your database
 * copy ```.env.example``` to ```.env``` and make sure values are correct
 
